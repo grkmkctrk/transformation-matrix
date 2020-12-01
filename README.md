@@ -13,34 +13,17 @@ This project is calculate the transformation matrix that you need when you use t
 
 
 
+a = Dler(
+                ["x", "x", "z", "x", "y"],                                              # sirasiyla eksenlerde (will rotate which around the axis in order )
+                [0, 90, 90, -60, 20],                                                   # bu kadar derece donsun (how much should rotate)
+                [[50, 10, 10], [0, 0, -10], [-50, 20, 10], [0, -10, 40], [10, -40, -5]] # her donme sonrasi yapmasi gerek hareket (movement origin to origin)
+            )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#b = a.Td()                                # donusum matrisleri (transformation matrices that progam used)
+#b = a.Dt()                                # bu matrislerin toplam carpimi (mutiplication of the matrices starting the rigth side)
+b = a.spePoints([10, 20, 30], adj = 0)     # 1 : global noktanin lokaldaki yeri (write 1 to find global location in local plane)
+                                           # 0 : lokaldeki noktanin globaldaki yeri (write 0 to find local location in global plane)      
 
 
 
