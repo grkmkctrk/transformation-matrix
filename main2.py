@@ -43,14 +43,25 @@ class Dler:
                     if T[n,m,k] == math.cos(math.radians(90)):
                         T[n,m,k] = 0
 
+        T = np.where((T < 0) & (T > -0.001) , 0, T)                 
+                        
         return T, len(self.derece)
 
 
     def Dt(self):
-        Tbitti = np.matmul(np.reshape(self.Td()[0][self.Td()[1] - 2, :, :], [4, 4]), np.reshape(self.Td()[0][self.Td()[1] - 1, :, :], [4, 4]))
+        
+        
+        Tbitti = np.matmul( # bu saga dogru tersten
+            self.Td()[0][self.Td()[1] - 2], # [0][2]
+            self.Td()[0][self.Td()[1] - 1]  # [0][3]
+            )
+        
         if self.Td()[1] > 2:  
             for i in range(self.Td()[1] - 3, -1, -1):
-                Tbitti = np.matmul(np.reshape(self.Td()[0][i, :, :], [4, 4]), Tbitti)
+                Tbitti = np.matmul(  # bu saga dogru tersten
+                    self.Td()[0][i],
+                    Tbitti
+                    )
             return Tbitti
     
     def spePoints(self, nokta, **adj):
